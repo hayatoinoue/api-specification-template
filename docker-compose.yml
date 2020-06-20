@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  swagger-editor:
+    image: swaggerapi/swagger-editor
+    container_name: "swagger-editor"
+    ports:
+      - "8001:8080"
+
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: "swagger-ui"
+    ports:
+      - "8002:8080"
+    volumes:
+      - ./doc/petstore.yml:/petstore.yml
+    environment:
+      SWAGGER_JSON: /petstore.yml
+
+  swagger-server:
+    image: stoplight/prism:3
+    ports:
+      - "4010:4010"
+    command: mock -h 0.0.0.0 -d /petstore.yml
+    volumes:
+      - ./doc/petstore.yml:/petstore.yml
