@@ -6,6 +6,7 @@ info:
     name: MIT
 servers:
   - url: http://localhost:4010
+    description: local mock server
 paths:
   /pets:
     get:
